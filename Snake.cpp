@@ -1,12 +1,13 @@
-//Snake
+//Snake.cpp
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
 #include <math.h>
+#include <conio.h>
 using namespace std;
-const int b=16,f=255,height=22,width=22;
+const int b=16,f=255,height=20,width=22;
 void intro();
-int x,y,z,fx,fy,lx,ly,selection,dir=27,score=0,length,grow,startlength,speedup,delaytime,board[width+1][height+1];
+int x,y,z,fx,fy,lx,ly,selection,dir=0,score=0,length,grow,startlength,speedup,delaytime,board[width+1][height+1];
 bool foodate=false,dead=false;
 
 
@@ -22,21 +23,21 @@ if (selection==1)
   grow=2;
   startlength=3;
   speedup=0.975;
-  delaytime=200;
+  delaytime=300;
   }
 else if (selection==2)
   {
   grow=3;
   startlength=3;
   speedup=0.9375;
-  delaytime=150;
+  delaytime=250;
   }
 else if (selection==3)
   {
   grow=4;
   startlength=3;
   speedup=0.9;
-  delaytime=100;
+  delaytime=200;
   }
 else if (selection==4)
   {
@@ -46,7 +47,6 @@ else if (selection==4)
   delaytime=120;
   }
 
-//makesnake
 length=startlength;
 x=1;
 y=1;
@@ -64,7 +64,7 @@ for (x=0;x<width+1;x++)    //was  for  x=1  to  width
   }
 for  (x=0;x<startlength;x++)
   {
-  board[x][1]=x;
+  board[x][0]=x+1;
   }
 
 
@@ -88,34 +88,35 @@ while (dead==false) //play the game
 
 
     //  <move>
-    //x=inkey /////////////////////////////////////////////////
-    //if  x=chr(27) + chr(4)  and  dir!=27 {dir=25} //(Left)
-    //if  x=chr(27) + chr(9)  and  dir!=28 {dir=26} //(Up)
-    //if  x=chr(27) + chr(5)  and  dir!=25 {dir=27} //(Right)
-    //if  x=chr(27) + chr(10) and  dir!=26 {dir=28} //(Down)
     int n;
-    if (dir==25)  { //if  moving  LEFT
+    if (kbhit()!=0) {x=getch();}
+    if ((n==119) or (n==97) or (n==115) or (n==100)) {dir=n;}
+    //119  w  up
+    //97   a  left
+    //115  s  down
+    //100  d  right
+    if (dir==97)  { //if  moving  LEFT
       n=board[fx-1][fy];
       if  (fx<2)  {dead=1;}
       if  (n>1)   {dead=1;}
       if  (n<2)   {fx=fx-1;board[fx][fy]=length+1;}
       if  (n==-1) {foodate=1;length=length+grow;}}
 
-    if (dir==26)  { //if  moving  UP
+    if (dir==119)  { //if  moving  UP
       n=board[fx][fy-1];
       if  (fy<2)  {dead=1;}
       if  (n>1)   {dead=1;}
       if  (n<2)   {fy=fy-1;board[fx][fy]=length+1;}
       if  (n==-1) {foodate=1;length=length+grow;}}
 
-    if (dir==27)  { //if  moving  RIGHT
+    if (dir==100)  { //if  moving  RIGHT
       n=board[fx+1][fy];
       if (fx+1>width) {dead=1;}
       if (n>1)        {dead=1;}
       if (n<2)        {fx=fx+1;board[fx][fy]=length+1;}
       if (n==-1)      {foodate=1;length=length+grow;}}
 
-    if (dir==28)  { //if  moving  DOWN
+    if (dir==115)  { //if  moving  DOWN
       n=board[fx][fy+1];
       if (fy+1>height) {dead=1;}
       if (n>1)         {dead=1;}
@@ -137,11 +138,10 @@ while (dead==false) //play the game
 
 
     //  <display>
-    cout<<endl<<string(((width*2)+4),'+')<<endl<<"++";
-    for (x=0;x<width;x++)
+    cout<<endl<<string(((width*2)+4),'+')<<endl<<string(((width*2)+4),'+')<<endl<<"++";
+    for (y=0;y<height;y++)
       {
-      for (y=0;y<height;y++)
-        /*
+      for (x=0;x<width;x++)
         {
         if (board[x][y]>0)       //SNAKE
           {//rect  x*b-(b-1),  y*b-(b-1),  STEP  b-1,  b-1,  color  rgb(0,255,0)  filled
@@ -156,13 +156,11 @@ while (dead==false) //play the game
           cout<<"  ";
           }
         else {cout<<"uh-oh";}
+        //cout<<board[x][y]<<" ";  //DEBUG
         }
-        */
-      cout<<board[x][y];
       cout<<"++"<<endl<<"++";
       }
-    cout<<string(((width*2)+2),'+')<<endl;
-    cout<<"  Score: "<<score<<endl;
+    cout<<string(((width*2)+2),'+')<<endl<<string(((width*2)+4),'+')<<endl<<"  Score: "<<score;
     //  </display>
 
 
@@ -206,8 +204,8 @@ cout<<" \\    /\\    / -|- --|-- |  |    --|--  /--\\  /--\\ -|-   /\\   |  |   
 cout<<"  \\  /  \\  /   |    |   |--|      |   (    ) \\--\\  |   /--\\  |--|    |< \n";
 cout<<"   \\/    \\/   -|-   |   |  |    \\-|    \\--/  \\--/ -|- /    \\ |  |    | \\.\n\n";
 cout<<"Choose:" <<endl;
-cout<<"1"<<setw(10)<<"Easy"  <<endl;
-cout<<"2"<<setw(10)<<"Medium"<<endl;
-cout<<"3"<<setw(10)<<"Hard"  <<endl;
-cout<<"4"<<setw(10)<<"Death" <<endl;
+cout<<"1"<<setw(8)<<"Easy"  <<endl;
+cout<<"2"<<setw(8)<<"Medium"<<endl;
+cout<<"3"<<setw(8)<<"Hard"  <<endl;
+cout<<"4"<<setw(8)<<"Death" <<endl;
 }
