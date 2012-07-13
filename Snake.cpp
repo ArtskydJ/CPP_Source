@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <time.h>
 using namespace std;
-const int b=16,f=255,height=10,width=20;
+const int b=16,f=255,height=15,width=15;
 void intro();
 int x,y,z,fx,fy,lx,ly,selection,dir=100,score=0,length,grow,startlength,delaytime,board[width+1][height+1];
 float speedup;
@@ -132,7 +132,7 @@ while (dead==false)
           }
         }
       }
-    //cout<<" fx="<<fx<<", fy="<<fy<<", lx="<<lx<<", ly="<<ly;
+    //cout<<" fx="<<fx<<", fy="<<fy<<", lx="<<lx<<", ly="<<ly; //DEBUG
     cout<<endl<<string((width+2),char(176))<<endl<<char(176);
     for (y=0;y<height;y++)
       {
