@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <time.h>
 using namespace std;
-const int b=16,f=255,height=22,width=22;
+const int b=16,f=255,height=10,width=20;
 void intro();
 int x,y,z,fx,fy,lx,ly,selection,dir=100,score=0,length,grow,startlength,delaytime,board[width+1][height+1];
 float speedup;
@@ -18,6 +18,7 @@ int main()
 intro();
 srand(time(0));
 cin>>selection;
+selection=1;
 if (selection<1) {selection=1;}
 if (selection>4) {selection=4;}
 if (selection==1)
@@ -132,29 +133,28 @@ while (dead==false)
         }
       }
     //cout<<" fx="<<fx<<", fy="<<fy<<", lx="<<lx<<", ly="<<ly;
-    cout<<endl<<"+"<<string(((width*2)),'-')<<"+";
+    cout<<endl<<string((width+2),char(176))<<endl<<char(176);
     for (y=0;y<height;y++)
       {
-      cout<<endl<<"|";
       for (x=0;x<width;x++)
         {
         if (board[x][y]>0)
           {
-          cout<<"[]";
+          cout<<char(219);
           }
         else if (board[x][y]<0)
           {
-          cout<<"<>";
+          cout<<char(3);
           }
         else
           {
-          cout<<"  ";
+          cout<<" ";
           }
         //cout<<board[x][y]<<" "; //DEBUG
         }
-      cout<<"|";
+      cout<<char(176)<<endl<<char(176);
       }
-    cout<<endl<<"+"<<string(((width*2)),'-')<<"+"<<endl;
+    cout<<string((width+1),char(176))<<endl;
     cout<<"  Score: "<<score;
     }
   if  (dead==false) //snakegrow
@@ -170,9 +170,9 @@ while (dead==false)
     }
   delaytime*=speedup;
   }
-cout<<endl<<"Game Over"<<endl<<"Press any key to Continue";
-getch();
-return dead;
+cout<<endl<<"Game Over";
+Sleep(2000);
+return 0;
 }
 
 void intro()
