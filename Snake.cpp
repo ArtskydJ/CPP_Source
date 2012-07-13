@@ -18,9 +18,8 @@ int main()
 intro();
 srand(time(0));
 cin>>selection;
-selection=1;
 if (selection<1) {selection=1;}
-if (selection>4) {selection=4;}
+if (selection>5) {selection=5;}
 if (selection==1)
   {
   grow=2;
@@ -48,6 +47,17 @@ else if (selection==4)
   startlength=10;
   speedup=1;
   delaytime=150;
+  }
+else if (selection==5)
+  {
+  cout<<"Start Length   = ";
+  cin>>startlength;
+  cout<<"Grow Length    = ";
+  cin>>grow;
+  cout<<"Speed up       = ";
+  cin>>speedup;
+  cout<<"Original Delay = ";
+  cin>>delaytime;
   }
 length=startlength;
 fx=startlength-1;
@@ -171,7 +181,7 @@ while (dead==false)
   delaytime*=speedup;
   }
 cout<<endl<<"Game Over";
-Sleep(2000);
+Sleep(2000);cout<<"4"<<setw(8)<<"Death" <<endl;
 return 0;
 }
 
@@ -192,10 +202,11 @@ cout<<endl;
 cout<<" \\    /\\    / -|- --|-- |  |    --|--  /--\\  /--\\ -|-   /\\   |  |    | /\n";
 cout<<"  \\  /  \\  /   |    |   |--|      |   (    ) \\--\\  |   /--\\  |--|    |< \n";
 cout<<"   \\/    \\/   -|-   |   |  |    \\-|    \\--/  \\--/ -|- /    \\ |  |    | \\.\n\n";
-cout<<"Controls: WASD"<<endl<<endl;
+cout<<"Controls: WASD"<<endl;
 cout<<"Choose:" <<endl;
 cout<<"1"<<setw(8)<<"Easy"  <<endl;
 cout<<"2"<<setw(8)<<"Medium"<<endl;
 cout<<"3"<<setw(8)<<"Hard"  <<endl;
 cout<<"4"<<setw(8)<<"Death" <<endl;
+cout<<"5"<<setw(8)<<"Custom"<<endl;
 }
