@@ -76,22 +76,30 @@ int main ()
   string type;
   bool loop;
   bool home;
+  bool keepon;
   srand(time(0));
-  cout<<"---Learn Colemak---"<<endl<<"Choose:"<<endl<<"1  All Chars"<<endl<<"2   Home Row"<<endl;
-  cin>>line;
+  cout<<"---Learn Colemak---"<<endl<<"Type 'exit' to exit."
+  <<endl<<"Choose:"<<endl<<"1  All Chars"<<endl<<"2   Home Row"<<endl;
+  type="0";
+  while(type!="1" && type!="2" && type!="exit")
+    {
+    cin>>type;
+    }
+  line=atoi(type.c_str());
   home=line-1;
-  loop=true;
+  loop=(type!="exit");
   while (loop)
     {
     if (home) line=((rand()%homenum)+maxnum-homenum);
     else      line=(rand()%maxnum);
     type="a";
-    for (int i=0; (type!=(string)read[line] && type!=""); i++)
+    for (int i=0; (type!=(string)read[line] && type!="exit"); i++)
       {
       if (i>0) cout<<"Try Again...";
       cout<<endl<<read[line]<<endl;
       cin>>type;
       }
+    loop=(type!="exit");
     }
   return 0;
   }
