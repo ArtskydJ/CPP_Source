@@ -6,6 +6,12 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#define LF 97
+#define UP 119
+#define RT 100
+#define DN 115
+
 using namespace std;
 const int b=16,f=255,height=15,width=15;
 void intro();
@@ -89,48 +95,29 @@ while (dead==false)
     {
     Sleep(delaytime);
     int n;
-    if ((kbhit())!=0) {n=getch();}
-    if ((n==119) or (n==97) or (n==115) or (n==100))
+    if (kbhit()!=0) {n=getch();}
+    if ((n==LF) or (n==UP) or (n==RT) or (n==DN))
       {
-      if ((n==97 and dir!=100)
-      or (n==119 and dir!=115)
-      or (n==115 and dir!=119)
-      or (n==100 and dir!=97))
+      if((n==LF and dir!=RT)
+      or (n==RT and dir!=LF)
+      or (n==DN and dir!=UP)
+      or (n==UP and dir!=DN))
         {dir=n;}
       }
-    if (dir==97)
-      { //if  moving  LEFT
-      n=board[fx-1][fy];
-      if  (fx<=0)  {dead=1;}
-      if  (n>1)   {dead=1;}
-      if  (n<=1)  {fx=fx-1;board[fx][fy]=length+1;}
-      if  (n==-1) {foodate=1;length=length+grow;}
-      }
-    if (dir==119)
-      { //if  moving  UP
-      n=board[fx][fy-1];
-      if  (fy<=0)  {dead=1;}
-      if  (n>1)   {dead=1;}
-      if  (n<=1)  {fy=fy-1;board[fx][fy]=length+1;}
-      if  (n==-1) {foodate=1;length=length+grow;}
-      }
-    if (dir==100)
-      { //if  moving  RIGHT
-      n=board[fx+1][fy];
-      if (fx>=width-1)  {dead=1;}
-      if (n>1)        {dead=1;}
-      if (n<=1)       {fx=fx+1;board[fx][fy]=length+1;}
-      if (n==-1)      {foodate=1;length=length+grow;}
-      }
-    if (dir==115)
-      { //if  moving  DOWN
-      n=board[fx][fy+1];
-      if (fy>=height-1)  {dead=1;}
-      if (n>1)         {dead=1;}
-      if (n<=1)        {fy=fy+1;board[fx][fy]=length+1;}
-      if (n==-1)       {foodate=1;length+=grow;}
-      }
-    if (dead==0) //GROW
+    int tempx=fx;
+    int tempy=fy;
+    if (dir==LF) tempx-=1;
+    if (dir==UP) tempy-=1;
+    if (dir==RT) tempx+=1;
+    if (dir==DN) tempy+=1;
+    n=board[tempx][tempy];
+    if  (tempx<0 || tempx>=width
+      || tempy<0 || tempy>=height
+      || n>1)
+        dead=true;
+    if  (n<=1)  {fx=tempx; fy=tempy; board[fx][fy]=length+1;}
+    if  (n==-1) {foodate=1;length=length+grow;}
+    if (dead==false) //GROW
       {
       for  (x=0;x<width;x++)
         {
