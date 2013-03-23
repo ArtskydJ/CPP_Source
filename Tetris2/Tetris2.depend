@@ -1,0 +1,4 @@
+# depslib dependency file v1.0
+1364002855 source:c:\github\cpp_source\tetris2\tetris2.cpp
+	"SDL/SDL.h"
+
