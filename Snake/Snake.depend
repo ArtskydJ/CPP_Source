@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1364325583 source:c:\github\cpp_source\snake\snake.cpp
+	<iostream>
+	<iomanip>
+	<string.h>
+	<windows.h>
+	<math.h>
+	<conio.h>
+	<stdlib.h>
+	<time.h>
+	"SDL/SDL.h"
+

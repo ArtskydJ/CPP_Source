@@ -8,6 +8,7 @@
 		<Build>
 			<Target title="Debug">
 				<Option output="bin\Debug\Snake" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Debug" />
 				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -17,8 +18,9 @@
 			</Target>
 			<Target title="Release">
 				<Option output="bin\Release\Snake" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Release" />
 				<Option object_output="obj\Release\" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -31,6 +33,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add option="-static-libgcc -static-libstdc++ --static-libs -static" />
+		</Linker>
 		<Unit filename="Snake.cpp" />
 		<Extensions>
 			<code_completion />
