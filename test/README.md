@@ -1,1 +1,0 @@
-My C++ Tests, Feel free to use, copy, modify, and stuffs.
